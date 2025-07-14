@@ -88,6 +88,7 @@ weather-app/
 ### Metodo 2: Docker Compose (Raccomandato)
 
    ```bash
+   cd weather-app
    bash build.sh
    ```
 
