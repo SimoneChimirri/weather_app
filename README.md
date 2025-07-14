@@ -159,12 +159,7 @@ L'applicazione include queste città di default:
 ### Testing
 
 ```bash
-# Test unitari
 mvn test
-
-# Test con profilo specifico
-mvn test -Dspring.profiles.active=test
-```
 
 ### Logs
 
