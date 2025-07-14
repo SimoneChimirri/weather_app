@@ -61,8 +61,6 @@ weather-app/
 
 ### Prerequisiti
 
-- Java 17 o superiore
-- Maven 3.6 o superiore
 - Docker e Docker Compose (per containerizzazione)
 
 ### Metodo 1: Avvio locale
@@ -89,39 +87,8 @@ weather-app/
 
 ### Metodo 2: Docker Compose (Raccomandato)
 
-1. **Compila il JAR**:
    ```bash
-   mvn clean package -DskipTests
-   ```
-
-2. **Avvia con Docker Compose**:
-   ```bash
-   docker-compose up -d
-   ```
-
-3. **Accedi all'app**:
-   - Applicazione: `http://localhost:8080`
-
-4. **Ferma i container**:
-   ```bash
-   docker-compose down
-   ```
-
-### Metodo 3: Solo Docker
-
-1. **Compila il JAR**:
-   ```bash
-   mvn clean package -DskipTests
-   ```
-
-2. **Costruisci l'immagine**:
-   ```bash
-   docker build -t weather-app .
-   ```
-
-3. **Avvia il container**:
-   ```bash
-   docker run -p 8080:8080 -v $(pwd)/data:/app/data weather-app
+   bash build.sh
    ```
 
 ## Utilizzo
