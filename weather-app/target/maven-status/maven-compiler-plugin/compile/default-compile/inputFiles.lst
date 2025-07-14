@@ -1,0 +1,8 @@
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/controller/WeatherController.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/service/CityService.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/dto/WeatherData.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/repository/CityRepository.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/model/City.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/config/DataInitializer.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/service/WeatherService.java
+/mnt/c/Users/Simone.Chimirri/Desktop/ITS2025_SWD/Containers_Docker/weather-app-java-docker-project/weather-app/src/main/java/com/example/weatherapp/WeatherAppApplication.java

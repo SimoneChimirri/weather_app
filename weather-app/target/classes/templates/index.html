@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .city-card {
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .city-card:hover {
+            transform: translateY(-5px);
+        }
+        .weather-icon {
+            font-size: 3rem;
+            color: #007bff;
+        }
+        .add-city-form {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .city-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-cloud-sun me-2"></i>Weather App
+            </a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h1 class="text-center mb-4">
+            <i class="fas fa-globe-europe me-2"></i>Seleziona una Città
+        </h1>
+
+        <!-- Form per aggiungere nuove città -->
+        <div class="add-city-form text-white">
+            <h3 class="mb-3"><i class="fas fa-plus-circle me-2"></i>Aggiungi Nuova Città</h3>
+            <form id="addCityForm" class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="cityName" placeholder="Nome città" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="cityCountry" placeholder="Nazione" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" id="cityLatitude" placeholder="Latitudine" step="0.0001" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" id="cityLongitude" placeholder="Longitudine" step="0.0001" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-light w-100">
+                        <i class="fas fa-plus me-1"></i>Aggiungi
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Griglia delle città -->
+        <div class="city-grid" id="cityGrid">
+            <div th:each="city : ${cities}" class="city-card" th:onclick="'window.location.href=\'/weather/' + ${city.id} + '\''">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-city weather-icon mb-3"></i>
+                        <h5 class="card-title" th:text="${city.name}"></h5>
+                        <p class="card-text text-muted" th:text="${city.country}"></p>
+                        <p class="card-text small">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            <span th:text="${city.latitude}"></span>, <span th:text="${city.longitude}"></span>
+                        </p>
+                        <button class="btn btn-outline-danger btn-sm" th:onclick="'deleteCityCard(' + ${city.id} + '); event.stopPropagation();'">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gestione form per aggiungere nuove città
+        document.getElementById('addCityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cityData = {
+                name: document.getElementById('cityName').value,
+                country: document.getElementById('cityCountry').value,
+                latitude: parseFloat(document.getElementById('cityLatitude').value),
+                longitude: parseFloat(document.getElementById('cityLongitude').value)
+            };
+            
+            fetch('/api/cities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cityData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                location.reload(); // Ricarica la pagina per vedere la nuova città
+            })
+            .catch(error => {
+                console.error('Errore nell\'aggiunta della città:', error);
+                alert('Errore nell\'aggiunta della città');
+            });
+        });
+
+        // Funzione per eliminare una città
+        function deleteCityCard(cityId) {
+            if (confirm('Sei sicuro di voler eliminare questa città?')) {
+                fetch(`/api/cities/${cityId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload(); // Ricarica la pagina
+                    } else {
+                        alert('Errore nell\'eliminazione della città');
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore nell\'eliminazione della città:', error);
+                    alert('Errore nell\'eliminazione della città');
+                });
+            }
+        }
+    </script>
+</body>
+</html>

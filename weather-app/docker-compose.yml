@@ -1,0 +1,13 @@
+services:
+  weather-app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - OPENMETEO_API_URL=https://api.open-meteo.com/v1/forecast
+    volumes:
+      - /tmp
+    restart: unless-stopped

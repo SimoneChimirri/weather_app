@@ -1,0 +1,10 @@
+com/example/weatherapp/dto/WeatherData$Hourly.class
+com/example/weatherapp/service/CityService.class
+com/example/weatherapp/repository/CityRepository.class
+com/example/weatherapp/config/DataInitializer.class
+com/example/weatherapp/WeatherAppApplication.class
+com/example/weatherapp/dto/WeatherData$Current.class
+com/example/weatherapp/model/City.class
+com/example/weatherapp/dto/WeatherData.class
+com/example/weatherapp/service/WeatherService.class
+com/example/weatherapp/controller/WeatherController.class
